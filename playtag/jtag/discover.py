@@ -12,9 +12,21 @@ from ..bsdl.lookup import PartInfo
 
 binnum = '{0:b}'.format
 
+class Jtag_TopLevel:
+    """ Test Access Port using """
+    def __init__(self):
+        # setup jtag with reset
+        #url = os.environ.get('FTDI_DEVICE', 'ftdi://ftdi:2232h/1')
+        url = os.environ.get('FTDI_DEVICE', 'ftdi://ftdi:232h:FT5UHR2J/1')
+        self.jtag = JtagEngine(trst=False, frequency=3E4)
+        self.jtag.configure(url)
+        print("JTAG: Init FTDI Device")
+        self.reset()
+        self.tool = JtagTool(self.jtag)
+
 class Chain(list):
-    mindev_idcode = 2
-    maxdev_idcode = 32
+    mindev_idcode = 10
+    maxdev_idcode = 10
     maxdev_noid = 32
     max_irbits = 20     # Max instruction length
     min_irbits = 2      # At least INTEST, EXTEST, and BYPASS
@@ -32,18 +44,18 @@ class Chain(list):
         idcodes = self.repeat_read(self.read_ids, 'IDCODE')
         self.dev_ids = dev_ids = self.find_ids(idcodes)
         self.numdevs = len(dev_ids)
-        ir = self.repeat_read(self.read_ir, 'IR')
-        ilengths = self.find_ilengths(ir)
-        if len(ilengths) > 1 and len(set(dev_ids)) != len(dev_ids):
-            self.stripdups(ilengths)
-        icapture = set(self.icapture_values(ir, x) for x in ilengths)
-        self[:] = [PartInfo(x) for x in dev_ids]
-        self.constrain_parts(icapture)
-        if len(icapture) != 1:
-            self.diagnose_chain(ir)
-            raise SystemExit
-        icapture, = icapture
-        self.updateparts(icapture)
+        # ir = self.repeat_read(self.read_ir, 'IR')
+        # ilengths = self.find_ilengths(ir)
+        # if len(ilengths) > 1 and len(set(dev_ids)) != len(dev_ids):
+        #     self.stripdups(ilengths)
+        # icapture = set(self.icapture_values(ir, x) for x in ilengths)
+        # self[:] = [PartInfo(x) for x in dev_ids]
+        # self.constrain_parts(icapture)
+        # if len(icapture) != 1:
+        #     self.diagnose_chain(ir)
+        #     raise SystemExit
+        # icapture, = icapture
+        # self.updateparts(icapture)
         self.reverse()
         self.add_bypass_info()
 
