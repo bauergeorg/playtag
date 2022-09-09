@@ -21,5 +21,14 @@
             "cwd": "${workspaceFolder}",
             "args": ["ftdi", "0"]
         },
+        {
+            "name": "SVF",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tools/jtag/loadsvf.py",
+            "console": "integratedTerminal",
+            "cwd": "${workspaceFolder}",
+            "args": ["ftdi", "0"]
+        },
     ]
 }
