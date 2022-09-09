@@ -12,18 +12,6 @@ from ..bsdl.lookup import PartInfo
 
 binnum = '{0:b}'.format
 
-class Jtag_TopLevel:
-    """ Test Access Port using """
-    def __init__(self):
-        # setup jtag with reset
-        #url = os.environ.get('FTDI_DEVICE', 'ftdi://ftdi:2232h/1')
-        url = os.environ.get('FTDI_DEVICE', 'ftdi://ftdi:232h:FT5UHR2J/1')
-        self.jtag = JtagEngine(trst=False, frequency=3E4)
-        self.jtag.configure(url)
-        print("JTAG: Init FTDI Device")
-        self.reset()
-        self.tool = JtagTool(self.jtag)
-
 class Chain(list):
     mindev_idcode = 10
     maxdev_idcode = 10
