@@ -158,7 +158,7 @@ def do_tms(info, addwrite, addread, old_tdi):
     tdo = ''.join(tdo)
     length = len(tms)
     assert 1 <= length <= maxbits
-    assert length == 1 or tdi != 'x'
+    #assert length == 1 or tdi != 'x'
     if 'x' not in tdo:
         instruction = Commands.tms_wr_bits
     else:
