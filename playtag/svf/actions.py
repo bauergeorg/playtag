@@ -16,10 +16,13 @@ Copyright (C) 2013 by Patrick Maupin.  All rights reserved.
 License information at: http://playtag.googlecode.com/svn/trunk/LICENSE.txt
 '''
 
+import sys
+import os
+
 dotest = __name__ == '__main__'
 if dotest:
-    import sys
-    sys.path.insert(0, '../..')
+    #sys.path.insert(0, '../..')
+    sys.path.insert(0, os.getcwd())
 
 from playtag.svf.parser import ParseSVF
 from playtag.jtag.template import JtagTemplate
@@ -164,9 +167,9 @@ class SvfActions(object):
 if dotest:
     from time import time
     starttime = time()
-    #fname, = sys.argv[1:]
-    fname = 'MB4_C7_mit_led_full_chain.svf'
-    #fname = 'recovery_a6_fpga.svf'
-    #fname = 'startup_motherboard.svf'
+    if sys.argv[1:] == []:
+        fname = 'example.svf'
+    else:
+        fname, = sys.argv[1:]
     SvfActions(fname)
-    print( time() - starttime)
+    print(time() - starttime)
