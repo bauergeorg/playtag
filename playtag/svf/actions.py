@@ -34,7 +34,7 @@ class DummyDriver(object):
 class SvfActions(object):
     shiftstates = JtagTemplate.shift_ir, JtagTemplate.shift_dr
     curstate = JtagTemplate.unknown
-    freqmult = 15   # Assumes that TCK frequency is this much faster than internal clock
+    freqmult = 1   # Assumes that TCK frequency is this much faster than internal clock
     realdriver = True
 
     def __init__(self, fname, driver=None):
