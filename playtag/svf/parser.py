@@ -8,6 +8,7 @@ Copyright (C) 2013 by Patrick Maupin.  All rights reserved.
 License information at: http://playtag.googlecode.com/svn/trunk/LICENSE.txt
 '''
 
+import os
 import re
 import zipfile
 from collections import namedtuple
@@ -15,7 +16,8 @@ from collections import namedtuple
 dotest = __name__ == '__main__'
 if dotest:
     import sys
-    sys.path.insert(0, '../..')
+    #sys.path.insert(0, '../..')
+    sys.path.insert(0, os.getcwd())
 
 from playtag.jtag.states import states as jtagstates
 
@@ -322,10 +324,10 @@ class ParseSVF(object):
 if dotest:
     from time import time
     starttime = time()
-    #fname, = sys.argv[1:]
-    fname = 'MB4_C7_mit_led_full_chain.svf'
-    #fname = 'recovery_a6_fpga.svf'
-    #fname = 'startup_motherboard.svf'
+    if sys.argv[1:] == []:
+        fname = 'example.svf'
+    else:
+        fname, = sys.argv[1:]
     for stuff in ParseSVF().parse(fname):
         print(stuff)
     print(time() - starttime)
