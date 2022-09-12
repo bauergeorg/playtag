@@ -29,7 +29,6 @@ class DummyDriver(object):
         self.template = template
     def apply_template(self, *tdi):
         print('Applying states', self.template.states, self.template.tms[:200])
-        pass
 
 class SvfActions(object):
     shiftstates = JtagTemplate.shift_ir, JtagTemplate.shift_dr
