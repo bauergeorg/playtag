@@ -56,7 +56,7 @@ class SvfActions(object):
     def State(self, data):
         prevstate = data.prevstate
         statelist = data.statelist
-        assert(prevstate == self.curstate)
+        assert prevstate == self.curstate
         self.curstate = statelist[-1]
         key = prevstate, statelist
         cache = self.statecache
@@ -71,9 +71,9 @@ class SvfActions(object):
         prevstate = data.prevstate
         endstate = data.endstate
         runstate = data.runstate
-        assert(prevstate == self.curstate)
+        assert prevstate == self.curstate
         self.curstate = endstate
-        assert(data.secs == [None, None])
+        assert data.secs == [None, None]
         numclocks = data.numclocks * (1 if data.use_sck else self.freqmult)
         key = numclocks, prevstate, runstate, endstate
         cache = self.statecache
