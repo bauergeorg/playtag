@@ -181,7 +181,7 @@ class ParseSVF(object):
     def cmd_reg(self, cmd, iterparams, linenum):
         mydict = self.sticky[cmd]
         try:
-            length = mydict.length = int(next(iterparams)) # python 2: iterparams.next()
+            length = mydict.length = int(next(iterparams))
         except:
             raise SvfError('Missing or invalid bit count')
         for p in self.paramtypes:
@@ -192,7 +192,7 @@ class ParseSVF(object):
             if param not in mydict:
                 raise SvfError('Unknown parameter name %s' % repr(param))
             try:
-                data = next(iterparams) # python 2: iterparams.next()
+                data = next(iterparams)
             except StopIteration:
                 data = ''
             if not isinstance(data, self.DataStream):
