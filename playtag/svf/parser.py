@@ -17,7 +17,7 @@ if dotest:
     import sys
     sys.path.insert(0, '../..')
 
-from jtag.states import states as jtagstates
+from playtag.jtag.states import states as jtagstates
 
 class SvfError(Exception):
     pass
