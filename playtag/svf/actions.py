@@ -98,7 +98,7 @@ class SvfActions(object):
         prevstate = data.prevstate
         endstate = data.endstate
         shiftstate = data.state
-        assert(prevstate == self.curstate)
+        assert prevstate == self.curstate
         self.curstate = endstate
 
         data = data.data
@@ -113,7 +113,7 @@ class SvfActions(object):
         cache = self.statecache
         if usetdo:
             if not smallxfer:
-                assert(0, "long TDO not yet supported")
+                assert 0, "long TDO not yet supported"
             tdomask = int(''.join(tdomask.data), 16)
             tdo     = int(''.join(tdo.data), 16)
             tdi     = int(''.join(tdi.data), 16)
