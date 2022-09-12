@@ -21,8 +21,8 @@ if dotest:
     import sys
     sys.path.insert(0, '../..')
 
-from svf.parser import ParseSVF
-from jtag.template import JtagTemplate
+from playtag.svf.parser import ParseSVF
+from playtag.jtag.template import JtagTemplate
 
 class DummyDriver(object):
     def make_template(self, template):
