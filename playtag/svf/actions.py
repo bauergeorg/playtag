@@ -90,7 +90,7 @@ class SvfActions(object):
     def Shift(self, data):
         #print "\n\nShifting\n\n"
         ok = data.header.length == 0 and data.trailer.length == 0
-        assert(ok, "Need to upgrade to allow multiples in chain")
+        assert ok, "Need to upgrade to allow multiples in chain"
 
         prevstate = data.prevstate
         endstate = data.endstate
@@ -117,25 +117,25 @@ class SvfActions(object):
             key     = prevstate, shiftstate, endstate, length, tdi
             template = cache.get(key)
             if template is None:
-                assert(shiftstate in self.shiftstates)
+                assert shiftstate in self.shiftstates
                 cache[key] = template = JtagTemplate(self.driver, startstate=prevstate)
                 op = (template.readi, template.readd)[shiftstate == JtagTemplate.shift_dr]
                 op(length, tdi=tdi)
                 template.update(endstate)
             if self.realdriver:
-                result = template().next()
-                assert(result & tdomask == tdo & tdomask, (result, tdo))
+                result = next(template())
+                assert result & tdomask == tdo & tdomask, (result, tdo)
             else:
                 template()
             return
 
         numchunks = len(tdi.data)
-        assert(numchunks)
+        assert numchunks
         if numchunks == 1:
             key = prevstate, shiftstate, endstate, length
             template = cache.get(key)
             if template is None:
-                assert(shiftstate in self.shiftstates)
+                assert shiftstate in self.shiftstates
                 cache[key] = template = JtagTemplate(self.driver, startstate=prevstate)
                 op = (template.writei, template.writed)[shiftstate == JtagTemplate.shift_dr]
                 op(length)
@@ -152,7 +152,7 @@ class SvfActions(object):
             key = prevstate, shiftstate, endstate, length
             template = cache.get(key)
             if template is None:
-                assert(shiftstate in self.shiftstates)
+                assert shiftstate in self.shiftstates
                 adv = endstate != shiftstate
                 cache[key] = template = JtagTemplate(self.driver, startstate=prevstate)
                 op = (template.writei, template.writed)[shiftstate == JtagTemplate.shift_dr]
