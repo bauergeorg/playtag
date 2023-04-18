@@ -91,7 +91,7 @@ class SvfActions(object):
         template()
 
     def Shift(self, data):
-        #print "\n\nShifting\n\n"
+        #print("\n\nShifting\n\n")
         ok = data.header.length == 0 and data.trailer.length == 0
         assert ok, "Need to upgrade to allow multiples in chain"
 
